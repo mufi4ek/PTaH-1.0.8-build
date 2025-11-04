@@ -27,12 +27,12 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: Install AMBuild 2.1.1 manually
+    - name: Install AMBuild 2.1 (коміт c7c1f5b)
       run: |
-        git clone https://github.com/alliedmodders/ambuild.git ambuild-src
-        cd ambuild-src
-        git checkout 2.1.1
-        python setup.py install
+          git clone https://github.com/alliedmodders/ambuild.git ambuild-src
+          cd ambuild-src
+          git checkout c7c1f5b
+          python setup.py install
 
     - name: Install Linux build deps
       if: runner.os == 'Linux'
