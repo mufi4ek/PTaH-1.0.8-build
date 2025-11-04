@@ -73,14 +73,18 @@ jobs:
         mkdir hl2sdk-csgo
         tar -xf hl2sdk.zip -C hl2sdk-csgo --strip-components=1 || powershell -Command "Expand-Archive -Path 'hl2sdk.zip' -DestinationPath 'hl2sdk-csgo'"
 
-    - name: Create build folder
-      run: mkdir -p project/build
-
-    - name: Run AMBuild
+    - name: Configure AMBuild
       shell: bash
       run: |
         cd project
-        ambuild build
+        mkdir build
+        ambuild configure build
+
+    - name: Build PTaH
+      shell: bash
+      run: |
+        cd project
+        ambuild build build
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
