@@ -22,15 +22,17 @@ jobs:
             os_short: windows
 
     steps:
-    - name: Setup Python 3.11
+    - name: Setup Python 3.10
       uses: actions/setup-python@v4
       with:
-        python-version: '3.11'
+        python-version: '3.10'
 
-    - name: Install AMBuild 2.1.1-compatible
+    - name: Install AMBuild 2.1.1 manually
       run: |
-        python -m pip install --upgrade pip setuptools wheel
-        pip install --no-build-isolation git+https://github.com/alliedmodders/ambuild@c7c1f5b
+        git clone https://github.com/alliedmodders/ambuild.git ambuild-src
+        cd ambuild-src
+        git checkout c7c1f5b
+        python setup.py install
 
     - name: Install Linux build deps
       if: runner.os == 'Linux'
