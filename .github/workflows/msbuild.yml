@@ -1,4 +1,4 @@
-name: Build PTaH
+  name: Build PTaH
 
 on:
   push:
@@ -79,7 +79,11 @@ jobs:
       shell: bash
       run: |
         cd project
-        ambuild .
+        mkdir build
+        python AMBuildScript
+        cd build
+        ambuild
+
 
 
     - name: Upload artifact
