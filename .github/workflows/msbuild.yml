@@ -65,19 +65,15 @@ jobs:
       with:
         path: project
 
-    - name: Checkout SourceMod
-      uses: actions/checkout@v3
-      with:
-        repository: alliedmodders/sourcemod
-        ref: 1.9-dev
-        path: sourcemod
+    - name: Download SourceMod 1.9.0.6167
+      run: |
+        curl -L -o sm.zip https://sm.alliedmods.net/smdrop/1.9/sourcemod-1.9.0-git6167-${{ matrix.os_short }}.zip
+        mkdir sourcemod && unzip sm.zip -d sourcemod
 
-    - name: Checkout HL2SDK-CSGO
-      uses: actions/checkout@v3
-      with:
-        repository: SourceMod/HL2SDK
-        ref: csgo
-        path: hl2sdk-csgo
+    - name: Download HL2SDK-CSGO
+      run: |
+        curl -L -o hl2sdk.zip https://github.com/alliedmodders/hl2sdk/archive/refs/heads/csgo.zip
+        mkdir hl2sdk-csgo && tar -xf hl2sdk.zip -C hl2sdk-csgo --strip-components=1
 
     - name: Build PTaH
       shell: bash
