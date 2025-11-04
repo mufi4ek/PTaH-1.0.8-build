@@ -90,4 +90,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: PTaH-${{ matrix.os_short }}
-        path: project/build/package
+        path: project/build/packageщ
