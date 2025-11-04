@@ -27,12 +27,9 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: Install AMBuild 2.1 manually
+    - name: Install AMBuild 2.1 (distutils branch)
       run: |
-        git clone https://github.com/alliedmodders/ambuild.git ambuild-src
-        cd ambuild-src
-        git checkout c7c1f5b
-        python setup.py install
+        pip install git+https://github.com/alliedmodders/ambuild@2.1-distutils
 
     - name: Install Linux build deps
       if: runner.os == 'Linux'
@@ -74,6 +71,7 @@ jobs:
         curl -L -o hl2sdk.zip https://github.com/alliedmodders/hl2sdk/archive/refs/heads/csgo.zip
         mkdir hl2sdk-csgo
         tar -xf hl2sdk.zip -C hl2sdk-csgo --strip-components=1 || powershell -Command "Expand-Archive -Path 'hl2sdk.zip' -DestinationPath 'hl2sdk-csgo'"
+
     - name: Build PTaH
       shell: bash
       run: |
