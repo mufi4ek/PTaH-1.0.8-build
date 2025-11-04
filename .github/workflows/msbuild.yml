@@ -27,12 +27,13 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: Install AMBuild 2.1 (ручна установка з run.py)
+    - name: Install AMBuild 2.1 (distutils)
       run: |
         git clone https://github.com/alliedmodders/ambuild.git ambuild-src
         cd ambuild-src
         git checkout 2.1-distutils
         python setup.py install
+
     - name: Install Linux build deps
       if: runner.os == 'Linux'
       run: |
@@ -78,10 +79,7 @@ jobs:
       shell: bash
       run: |
         cd project
-        mkdir build
-        python AMBuildScript
-        cd build
-        ambuild
+        ambuild .
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
