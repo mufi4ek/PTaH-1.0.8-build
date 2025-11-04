@@ -1,17 +1,5 @@
 import os
-import ambuild2.frontend
+import ambuild2
 
-# Створюємо білдер через frontend API
-builder = ambuild2.frontend.Build(
-    sourcePath=os.path.dirname(__file__),
-    api='2.2'
-)
-
-# Конфігуруємо білд
-builder.Configure()
-
-# Підключаємо AMBuilder
-builder.AddBuildScript('AMBuilder')
-
-# Запускаємо білд
-builder.Build()
+# Запускаємо конфігурацію білду
+ambuild2.run(os.path.dirname(__file__), '2.2')
