@@ -1,12 +1,5 @@
 import os
-import sys
-import ambuild2.frontend
+import ambuild2
 
-builder = ambuild2.frontend.Build(
-    sourcePath=os.path.dirname(__file__),
-    api='2.2'
-)
-
-builder.Configure()
-builder.AddBuildScript('AMBuilder')
-builder.Build()
+# Запускаємо AMBuild 2.2 конфігурацію
+ambuild2.run.BuildScript(os.path.dirname(__file__), '2.2')
