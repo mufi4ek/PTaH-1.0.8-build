@@ -19,7 +19,7 @@ jobs:
           - os: ubuntu-20.04
             os_short: linux
           - os: windows-latest
-            os_short: win
+            os_short: windows
 
     steps:
     - name: Short SHA
@@ -68,12 +68,14 @@ jobs:
     - name: Download SourceMod 1.9.0.6167
       run: |
         curl -L -o sm.zip https://sm.alliedmods.net/smdrop/1.9/sourcemod-1.9.0-git6167-${{ matrix.os_short }}.zip
-        mkdir sourcemod && unzip sm.zip -d sourcemod
+        mkdir sourcemod
+        unzip sm.zip -d sourcemod || powershell -Command "Expand-Archive -Path 'sm.zip' -DestinationPath 'sourcemod'"
 
     - name: Download HL2SDK-CSGO
       run: |
         curl -L -o hl2sdk.zip https://github.com/alliedmodders/hl2sdk/archive/refs/heads/csgo.zip
-        mkdir hl2sdk-csgo && tar -xf hl2sdk.zip -C hl2sdk-csgo --strip-components=1
+        mkdir hl2sdk-csgo
+        tar -xf hl2sdk.zip -C hl2sdk-csgo --strip-components=1 || powershell -Command "Expand-Archive -Path 'hl2sdk.zip' -DestinationPath 'hl2sdk-csgo'"
 
     - name: Build PTaH
       shell: bash
