@@ -60,6 +60,8 @@ jobs:
 
     - name: Checkout PTaH
       uses: actions/checkout@v3
+      with:
+        path: PTaH
 
     - name: Download SourceMod 1.9.0.6167
       run: |
@@ -76,10 +78,11 @@ jobs:
     - name: Build PTaH
       shell: bash
       run: |
+        cd PTaH
         ambuild .
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: PTaH-${{ matrix.os_short }}
-        path: build/package
+        path: PTaH/build/package
