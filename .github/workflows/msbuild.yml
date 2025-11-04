@@ -22,10 +22,6 @@ jobs:
             os_short: windows
 
     steps:
-    - name: Short SHA
-      shell: bash
-      run: echo "GITHUB_SHA_SHORT=${GITHUB_SHA::7}" >> $GITHUB_ENV
-
     - name: Setup Python 3.11
       uses: actions/setup-python@v4
       with:
@@ -77,17 +73,11 @@ jobs:
         mkdir hl2sdk-csgo
         tar -xf hl2sdk.zip -C hl2sdk-csgo --strip-components=1 || powershell -Command "Expand-Archive -Path 'hl2sdk.zip' -DestinationPath 'hl2sdk-csgo'"
 
-    - name: Configure AMBuild
-      shell: bash
-      run: |
-        cd project
-        ambuild configure build
-
     - name: Build PTaH
       shell: bash
       run: |
         cd project
-        ambuild build build
+        ambuild build
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
