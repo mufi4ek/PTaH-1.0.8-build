@@ -71,3 +71,4 @@ for sdk_name in ['csgo']:
   compiler.linkflags.insert(0, binary.Dep(lib_path))
 
 Extension.extensions = builder.Add(project)
+builder.Build()
