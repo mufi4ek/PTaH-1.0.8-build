@@ -81,13 +81,13 @@ jobs:
       shell: bash
       run: |
         cd project
-        ambuild configure --api 2.2 --build-dir build
+        ambuild configure build
 
     - name: Build PTaH
       shell: bash
       run: |
         cd project
-        ambuild build --build-dir build
+        ambuild build build
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
