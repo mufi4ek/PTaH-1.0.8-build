@@ -27,9 +27,12 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: Install AMBuild 2.1
+    - name: Install AMBuild 2.1.1 manually
       run: |
-        pip install --no-build-isolation git+https://github.com/alliedmodders/ambuild@ambuild-2.1
+        git clone https://github.com/alliedmodders/ambuild.git ambuild-src
+        cd ambuild-src
+        git checkout 2.1.1
+        python setup.py install
 
     - name: Install Linux build deps
       if: runner.os == 'Linux'
