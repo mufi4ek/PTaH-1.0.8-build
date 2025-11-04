@@ -1,5 +1,14 @@
 import os
 import ambuild2
 
-# Запускаємо AMBuild 2.2 конфігурацію
-ambuild2.run.BuildScript(os.path.dirname(__file__), '2.2')
+# Створюємо білдер з API 2.2
+builder = ambuild2.builder.Builder(sourcePath=os.path.dirname(__file__), api='2.2')
+
+# Конфігуруємо білд
+builder.Configure()
+
+# Підключаємо основний скрипт
+builder.AddBuildScript('AMBuilder')
+
+# Запускаємо білд
+builder.Build()
