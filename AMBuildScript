@@ -1,5 +1,4 @@
 import os
 import ambuild2
 
-# Запускаємо конфігурацію білду
-ambuild2.run(os.path.dirname(__file__), '2.2')
+ambuild2.run.BuildScript(os.path.dirname(__file__), '2.1')
