@@ -27,12 +27,10 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: Install AMBuild 2.1 (distutils)
+    - name: Install AMBuild 2.1.1
       run: |
-        git clone https://github.com/alliedmodders/ambuild.git ambuild-src
-        cd ambuild-src
-        git checkout 2.1-distutils
-        python setup.py install
+        python -m pip install --upgrade pip setuptools wheel
+        pip install --no-build-isolation git+https://github.com/alliedmodders/ambuild@2.1.1
 
     - name: Install Linux build deps
       if: runner.os == 'Linux'
@@ -60,6 +58,8 @@ jobs:
 
     - name: Checkout PTaH
       uses: actions/checkout@v3
+      with:
+        path: project
 
     - name: Download SourceMod 1.9.0.6167
       run: |
@@ -73,13 +73,17 @@ jobs:
         mkdir hl2sdk-csgo
         tar -xf hl2sdk.zip -C hl2sdk-csgo --strip-components=1 || powershell -Command "Expand-Archive -Path 'hl2sdk.zip' -DestinationPath 'hl2sdk-csgo'"
 
-    - name: Build PTaH (Windows auto-locate)
-      shell: pwsh
+    - name: Build PTaH
+      shell: bash
       run: |
-        ./build.ps1
+        cd project
+        mkdir build
+        python AMBuildScript
+        cd build
+        ambuild
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: PTaH-${{ matrix.os_short }}
-        path: build/package
+        path: project/build/package
